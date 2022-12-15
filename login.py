@@ -5,6 +5,7 @@
 from tkinter import *
 from register import *
 from user_interface import *
+from admin_interface import *
 from tkinter import messagebox
 import json
 
@@ -106,11 +107,12 @@ class Login:
         self.master.withdraw()
         UserInterface(Toplevel(), self.user_dict[self.user_name.get()])
 
-
     # 进入管理员界面
     def goto_admin_interface(self):
-        pass
+        self.master.withdraw()
+        AdminInterface(Toplevel(), self.admin_dict[self.user_name.get()])
 
+    # 进行注册操作
     def register(self):
         self.master.withdraw()
         Register(self.master)
