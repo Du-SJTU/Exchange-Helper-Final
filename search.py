@@ -126,10 +126,15 @@ class Search:
             '类型：' + self.item_dict[index]['type'] + '\n' +\
             '简介：' + self.item_dict[index]['intro'] + '\n'
         self.item_dict[index]
+        
         attribution_dict = self.item_dict[index]['attributions'] # 不同种类物品特有属性
         # 显示物品特有属性
-        for attribution in attribution_dict.keys():
-            text = text + attribution + "：" + attribution_dict[attribution] + '\n'
+        for attribution in self.type_dict[self.item_dict[index]['type']]:
+            text = text + attribution + "：" 
+            try:
+                text = text + attribution_dict[attribution] + '\n'
+            except:
+                text = text + '\n'
         owner_account = self.item_dict[index]['owner']
         # 显示物主信息
         text = text + '物主姓名：' + self.user_dict[owner_account]['name'] + '（用户名：' + owner_account + '）\n' +\

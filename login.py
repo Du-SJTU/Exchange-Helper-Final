@@ -105,7 +105,7 @@ class Login:
     # 进入用户界面
     def goto_user_interface(self):
         self.master.withdraw()
-        UserInterface(Toplevel(), self.user_dict[self.user_name.get()])
+        UserInterface(Toplevel(), self.user_name.get(), self.user_dict[self.user_name.get()])
 
     # 进入管理员界面
     def goto_admin_interface(self):

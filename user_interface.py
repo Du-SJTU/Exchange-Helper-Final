@@ -12,10 +12,11 @@ from delete import *
 # 用户操作界面类
 class UserInterface:
     # 初始化用户操作界面
-    def __init__(self, master, user_dict):
+    def __init__(self, master, user_name, user_dict):
         # 控件
         self.master = master
         self.user_dict = user_dict
+        self.user_name = user_name
         self.button_add = Button(self.master, text='添加物品', command=self.add_item)
         self.button_search = Button(self.master, text='查找物品', command=self.search_item)
         self.button_delete = Button(self.master, text='删除物品', command=self.delete_item)
@@ -23,7 +24,6 @@ class UserInterface:
 
         # 初始化事件
         self.align_ui() # 排列UI控件
-        # 注意修改！
         self.master.protocol("WM_DELETE_WINDOW", lambda x=0: exit(x)) # 关闭此窗口退出程序
 
     # 排列UI中的控件
@@ -42,9 +42,8 @@ class UserInterface:
 
     # 添加物品
     def add_item(self):
-        self.get_item_dict()
-        
-        pass
+        self.master.withdraw()
+        Add(Toplevel(), self.user_dict, self.master)
 
     # 查找物品
     def search_item(self):
@@ -53,7 +52,9 @@ class UserInterface:
 
     # 删除物品
     def delete_item(self):
-        pass
+        self.master.withdraw()
+        
+        Delete(Toplevel(), self.user_name, self.master)
 
     # 获取物品字典
     def get_item_dict(self):
