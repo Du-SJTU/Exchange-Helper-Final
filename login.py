@@ -81,7 +81,10 @@ class Login:
         password = self.password.get()
         try:
             if self.user_dict[account]['password'] == password:
-                self.goto_user_interface() # 进入用户界面
+                if self.user_dict[account]['formal_user']:
+                    self.goto_user_interface() # 进入用户界面
+                else:
+                    messagebox.showwarning('用户登录失败', '请等待管理员批准为正式用户！')
             else:
                 messagebox.showwarning('用户登录失败', '用户名或密码错误！')
         # 如果用户名不在字典中，则进行同样的弹窗处理

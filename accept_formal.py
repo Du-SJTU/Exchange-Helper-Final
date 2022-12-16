@@ -18,6 +18,8 @@ class Accept:
         self.scroll_informal.config(command=self.list_informal.yview)
         self.button_accept = Button(self.master, text='通过申请', command=self.accept)
         self.button_back = Button(self.master, text='返回管理员界面', command=self.back)
+        self.label_detail = Label(self.master)
+        self.list_informal.bind('<Double-Button-1>', lambda x: self.show_detail())
         # 初始化事件
         self.master.protocol("WM_DELETE_WINDOW", lambda: self.back())  # 关闭此窗口返回管理员界面
         self.align_ui() # 排列UI组件
@@ -27,13 +29,14 @@ class Accept:
     # 排列UI组件
     def align_ui(self):
         self.master.title('批准正式用户申请')
-        self.master.geometry('300x180')
+        self.master.geometry('300x280')
         self.master.resizable(0, 0)  # 禁止调节窗口大小
         Label(self.master, text='选择批准的用户：').grid(row=0, column=0)
         self.scroll_informal.grid(row=1, column=1, rowspan=3)
         self.list_informal.grid(row=1, column=0, rowspan=3)
         self.button_accept.grid(row=4, column=0)
         self.button_back.grid(row=5, column=0)
+        self.label_detail.grid(row=6, column=0)
 
     # 获取用户信息，以获取用户是否为正式用户
     def get_userdata(self):
@@ -63,6 +66,16 @@ class Accept:
             self.user_dict[selected_user]['formal_user'] = True
         self.save_userdata() # 将变更的用户信息重新存储
         self.load_inforaml_user() # 重新加载非正式用户列表
+
+    def show_detail(self):
+        text = ''
+        index = self.list_informal.get(self.list_informal.curselection())
+        # 显示物主信息
+        text = text + '姓名：' + self.user_dict[index]['name'] +\
+            '（用户名：' + index + '）\n' +\
+            '地址：' + self.user_dict[index]['address'] + '\n' +\
+            '联系方式：' + self.user_dict[index]['tel']
+        self.label_detail['text'] = text
 
     # 返回管理员界面
     def back(self):
