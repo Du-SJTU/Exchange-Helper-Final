@@ -1,8 +1,9 @@
-# File: login.py
+# File: admin_interface.py
 # Author: Du Jiajie
 # Function: 管理员界面
 
 from tkinter import *
+from accept_formal import *
 
 # 管理员操作界面类
 class AdminInterface:
@@ -30,7 +31,8 @@ class AdminInterface:
         self.button_back.grid(row=1, column=2)
 
     def accept(self):
-        pass
+        self.master.withdraw()
+        Accept(Toplevel(), self.master)
 
     def change_type(self):
         pass

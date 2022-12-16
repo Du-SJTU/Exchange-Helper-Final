@@ -1,4 +1,4 @@
-# File: user_interface.py
+# File: accept_formal.py
 # Author: Du Jiajie
 # Function: 通过正式用户批准界面
 

@@ -1,4 +1,4 @@
-# File: login.py
+# File: main.py
 # Author: Du Jiajie
 # Function: 主程序
 from tkinter import *

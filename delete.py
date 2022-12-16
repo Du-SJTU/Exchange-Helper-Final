@@ -1,4 +1,4 @@
-# File: search.py
+# File: delete.py
 # Author: Du Jiajie
 # Function: 删除物品界面
 
