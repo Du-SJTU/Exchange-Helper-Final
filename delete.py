@@ -112,14 +112,15 @@ class Delete:
             messagebox.showwarning('错误', '请选择要删除的物品！')
             return
         index = item_delete.split(':')[0]
-        del self.item_dict[index]
-        self.save_item()
-        self.load()
+        if messagebox.askyesno('确认', '确定要删除' + self.item_dict[index]['name'] + '吗？'):
+            del self.item_dict[index]
+            self.save_item()
+            self.load()
 
     # 保存物品信息
     def save_item(self):
         with open('./data/item.json', 'w', encoding='utf-8') as f:
-            f.write(json.dumps(self.user_dict))
+            f.write(json.dumps(self.item_dict))
 
     # 返回用户界面
     def back(self):

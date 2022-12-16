@@ -146,7 +146,3 @@ class Change:
         with open('./data/type.json', 'w', encoding='utf-8') as f:
             f.write(json.dumps(self.type_dict))
 
-
-root = Tk()
-Change(root, {})
-root.mainloop()
