@@ -43,7 +43,7 @@ class UserInterface:
     # 添加物品
     def add_item(self):
         self.master.withdraw()
-        Add(Toplevel(), self.user_dict, self.master)
+        Add(Toplevel(), self.user_name, self.master)
 
     # 查找物品
     def search_item(self):

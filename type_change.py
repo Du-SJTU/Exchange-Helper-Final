@@ -4,6 +4,7 @@
 
 from tkinter import *
 from admin_interface import *
+from tkinter import messagebox
 
 # 类型修改界面类
 class Change:
@@ -30,6 +31,8 @@ class Change:
         # 属性和类型数据
         self.entry_type = Entry(self.master, textvariable=self.new_type)
         self.entry_attribution = Entry(self.master, textvariable=self.new_attribution)
+        self.master.protocol("WM_DELETE_WINDOW", lambda: self.back())  # 关闭此窗口返回用户界面
+        self.button_back = Button(self.master, text='返回管理员界面', command=self.back)
         # 初始化事件
         self.align_ui() # 排列UI控件
         self.load_type() # 显示类型数据
@@ -65,7 +68,7 @@ class Change:
     # 排列UI控件
     def align_ui(self):
         self.master.title("物品类型修改")
-        self.master.geometry('350x250')
+        self.master.geometry('350x270')
         self.master.resizable(0, 0)  # 禁止调节窗口大小
         Label(self.master, text='类型（双击以选择）').grid(row=0, column=0)
         Label(self.master, text='属性（双击以选择）').grid(row=0, column=2)
@@ -81,6 +84,7 @@ class Change:
         self.button_new_attribution.grid(row=4, column=2)
         self.button_change_type.grid(row=5, column=0)
         self.button_change_attribution.grid(row=5, column=2)
+        self.button_back.grid(row=6, column=2)
 
     # 重命名类型
     def rename_type(self):
@@ -145,4 +149,9 @@ class Change:
     def save_type(self):
         with open('./data/type.json', 'w', encoding='utf-8') as f:
             f.write(json.dumps(self.type_dict))
+
+    # 返回管理员界面
+    def back(self):
+        self.master.withdraw()
+        self.admin_interface.deiconify()
 

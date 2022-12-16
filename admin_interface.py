@@ -4,6 +4,7 @@
 
 from tkinter import *
 from accept_formal import *
+from type_change import *
 
 # 管理员操作界面类
 class AdminInterface:
@@ -35,8 +36,9 @@ class AdminInterface:
         Accept(Toplevel(), self.master)
 
     def change_type(self):
-        pass
+        self.master.withdraw()
+        Change(Toplevel(), self.master)
 
     #退出登录，返回登录界面
     def back(self):
-        self.master.destroy()
+        exit(0)

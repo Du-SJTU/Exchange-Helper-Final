@@ -19,7 +19,7 @@ class Accept:
         self.button_accept = Button(self.master, text='通过申请', command=self.accept)
         self.button_back = Button(self.master, text='返回管理员界面', command=self.back)
         # 初始化事件
-        self.master.protocol("WM_DELETE_WINDOW", lambda: self.back())  # 关闭此窗口返回用户界面
+        self.master.protocol("WM_DELETE_WINDOW", lambda: self.back())  # 关闭此窗口返回管理员界面
         self.align_ui() # 排列UI组件
         self.get_userdata() # 获取用户信息
         self.load_inforaml_user() # 加载非正式用户列表
