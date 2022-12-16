@@ -126,6 +126,3 @@ class Delete:
         self.master.withdraw()
         self.user_interface.deiconify()
 
-# root = Tk()
-# Delete(root, {}, {})
-# root.mainloop()

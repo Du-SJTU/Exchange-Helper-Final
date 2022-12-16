@@ -20,11 +20,11 @@ class UserInterface:
         self.button_add = Button(self.master, text='添加物品', command=self.add_item)
         self.button_search = Button(self.master, text='查找物品', command=self.search_item)
         self.button_delete = Button(self.master, text='删除物品', command=self.delete_item)
-        self.button_back = Button(self.master, text='退出登录', command=self.back)
+        self.button_back = Button(self.master, text='退出登录', command=self.quit)
 
         # 初始化事件
         self.align_ui() # 排列UI控件
-        self.master.protocol("WM_DELETE_WINDOW", lambda x=0: exit(x)) # 关闭此窗口退出程序
+        self.master.protocol("WM_DELETE_WINDOW", lambda: exit(0)) # 关闭此窗口退出程序
 
     # 排列UI中的控件
     def align_ui(self):
@@ -61,8 +61,8 @@ class UserInterface:
         with open('./data/item.json', 'r', encoding='utf-8') as f:
             self.item_dict = json.loads(f.readline())
 
-    #退出登录，返回登录界面
-    def back(self):
-        self.master.destroy()
+    #退出登录
+    def quit(self):
+        exit(0)
 
         

@@ -7,6 +7,7 @@ from login import *
 def main():
     root = Tk()
     login = Login(root)
+    root.protocol('WM_DELETE', lambda: exit())
     root.mainloop()
     
 

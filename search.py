@@ -137,7 +137,8 @@ class Search:
                 text = text + '\n'
         owner_account = self.item_dict[index]['owner']
         # 显示物主信息
-        text = text + '物主姓名：' + self.user_dict[owner_account]['name'] + '（用户名：' + owner_account + '）\n' +\
+        text = text + '物主姓名：' + self.user_dict[owner_account]['name'] +\
+            '（用户名：' + owner_account + '）\n' +\
             '地址：' + self.user_dict[owner_account]['address'] + '\n' +\
             '联系方式：' + self.user_dict[owner_account]['tel']
         self.label_detail.config(text=text)
