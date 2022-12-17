@@ -13,12 +13,13 @@ class Accept:
         self.master = master
         self.admin_interface = admin_interface
         # 控件
-        self.scroll_informal = Scrollbar(self.master) # 用于显示非正式用户
+        # 用于显示非正式用户
+        self.scroll_informal = Scrollbar(self.master) 
         self.list_informal = Listbox(self.master, width=40, height=4, yscrollcommand=self.scroll_informal.set)
         self.scroll_informal.config(command=self.list_informal.yview)
-        self.button_accept = Button(self.master, text='通过申请', command=self.accept)
-        self.button_back = Button(self.master, text='返回管理员界面', command=self.back)
-        self.label_detail = Label(self.master)
+        self.button_accept = Button(self.master, text='通过申请', command=self.accept) # 批准用户申请按钮
+        self.button_back = Button(self.master, text='返回管理员界面', command=self.back) # 返回按钮
+        self.label_detail = Label(self.master) # 显示用户详细信息
         self.list_informal.bind('<Double-Button-1>', lambda x: self.show_detail())
         # 初始化事件
         self.master.protocol("WM_DELETE_WINDOW", lambda: self.back())  # 关闭此窗口返回管理员界面
@@ -50,8 +51,8 @@ class Accept:
 
     # 加载非正式用户列表
     def load_inforaml_user(self):
-        self.list_informal.delete(0, END)
-        for user in self.user_dict.keys():
+        self.list_informal.delete(0, END) # 清空列表
+        for user in self.user_dict.keys(): # 遍历字典，将其中的非正式用户的用户名加入列表
             if not self.user_dict[user]['formal_user']:
                 self.list_informal.insert(END, user)
 
@@ -69,7 +70,7 @@ class Accept:
 
     def show_detail(self):
         text = ''
-        index = self.list_informal.get(self.list_informal.curselection())
+        index = self.list_informal.get(self.list_informal.curselection()) # 获得选中的物品
         # 显示物主信息
         text = text + '姓名：' + self.user_dict[index]['name'] +\
             '（用户名：' + index + '）\n' +\

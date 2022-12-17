@@ -114,8 +114,8 @@ class Delete:
         index = item_delete.split(':')[0]
         if messagebox.askyesno('确认', '确定要删除' + self.item_dict[index]['name'] + '吗？'):
             del self.item_dict[index]
-            self.save_item()
-            self.load()
+            self.save_item() # 保存物品列表
+            self.load() # 重新加载物品列表
 
     # 保存物品信息
     def save_item(self):

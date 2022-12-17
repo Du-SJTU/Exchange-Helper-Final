@@ -6,6 +6,7 @@ from tkinter import *
 from tkinter import ttk
 import json
 from user_interface import *
+from tkinter import messagebox
 import time
 
 # 添加物品控制窗口类

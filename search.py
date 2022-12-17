@@ -77,6 +77,7 @@ class Search:
         with open('./data/item.json', 'r', encoding='utf-8') as f:
             self.item_dict = json.loads(f.readline())
 
+    # 进行查找物品操作
     def find(self):
         self.result_cnt = 0 # 计数器归零
         self.list_result.delete(0, END) # 清空搜索结果列表
@@ -90,11 +91,11 @@ class Search:
         is_intro = self.is_intro.get()
         
         for item in self.item_dict.keys():
-            if not is_owner and not is_intro:
+            if not is_owner and not is_intro: # 没有选择匹配关键字
                 messagebox.showwarning('错误', '请选择要匹配的关键字类型！')
                 return
             else:
-                if self.item_dict[item]['type'] == item_type:
+                if self.item_dict[item]['type'] == item_type: # 类型匹配
                     if is_owner and not is_intro:
                         # 匹配物品所有者
                         if self.item_dict[item]['owner'] == keyword:
@@ -106,6 +107,7 @@ class Search:
                             self.list_result.insert(END, item + ':' + self.item_dict[item]['name'])
                             self.result_cnt += 1
                     elif is_owner and is_intro:
+                        # 物品所有者和物品说明同时匹配
                         if self.item_dict[item]['owner'] == keyword or keyword in self.item_dict[item]['intro']:
                             self.list_result.insert(END, item + ':' + self.item_dict[item]['name'])
                             self.result_cnt += 1
@@ -133,7 +135,7 @@ class Search:
             text = text + attribution + "：" 
             try:
                 text = text + attribution_dict[attribution] + '\n'
-            except:
+            except: # 如果字典里面无对应键值对，则跳过
                 text = text + '\n'
         owner_account = self.item_dict[index]['owner']
         # 显示物主信息

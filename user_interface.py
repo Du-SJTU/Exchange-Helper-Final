@@ -53,7 +53,6 @@ class UserInterface:
     # 删除物品
     def delete_item(self):
         self.master.withdraw()
-        
         Delete(Toplevel(), self.user_name, self.master)
 
     # 获取物品字典

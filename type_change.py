@@ -5,6 +5,7 @@
 from tkinter import *
 from admin_interface import *
 from tkinter import messagebox
+import json
 
 # 类型修改界面类
 class Change:
@@ -89,60 +90,62 @@ class Change:
     # 重命名类型
     def rename_type(self):
         try:
+            # 获取需要修改的类型名称
             self.selected_type = self.list_typename.get(self.list_typename.curselection())
-        except:
+        except: # 如果没有选择需要修改的类型则报错
             messagebox.showwarning('错误', '请选择要修改的物品类型')
             return
         temp_attribution = self.type_dict[self.selected_type]
-        new_typename = self.entry_type.get()
-        if new_typename in self.type_dict.keys():
+        new_typename = self.entry_type.get() # 获取重命名的新类型名
+        if new_typename in self.type_dict.keys(): # 检测类型名是否重复
             messagebox.showwarning('错误', '该类型已存在！')
         else:
             if messagebox.askyesno('确认', '确认要将' + self.selected_type + '更名为' + new_typename + '吗？'):
                 self.type_dict[new_typename] = temp_attribution
                 del self.type_dict[self.selected_type]
-        self.save_type()
+        self.save_type() # 保存类型字典
         self.load_type() # 重新加载类型
 
     # 重命名属性
     def rename_attribution(self):
         try:
+            # 获取需要修改的属性名称
             self.selected_attribution = self.list_attribution.get(self.list_attribution.curselection())
-        except:
+        except: # 如果没有选择需要修改的属性则报错
             messagebox.showwarning('错误', '请选择要修改的物品属性')
             return
-        new_attribution = self.entry_attribution.get()
-        if new_attribution in self.type_dict[self.selected_type]:
+        new_attribution = self.entry_attribution.get() # 获取新输入的属性名称
+        if new_attribution in self.type_dict[self.selected_type]: # 检测属性名称是否重复
             messagebox.showwarning('错误', '该属性已存在！')
         else:
             if messagebox.askyesno('确认', '确认要将' + self.selected_attribution + '更名为' + new_attribution + '吗？'):
                 self.type_dict[self.selected_type].append(new_attribution)
                 self.type_dict[self.selected_type].remove(self.selected_attribution)
                 self.changed_type = self.selected_type
-        self.save_type()
+        self.save_type() # 保存类型字典
         self.load_attribution() # 重新加载属性
 
     # 新建类型
     def create_type(self):
-        new_typename = self.entry_type.get()
-        if new_typename in self.type_dict.keys():
+        new_typename = self.entry_type.get() # 获取输入的新类型名称
+        if new_typename in self.type_dict.keys(): # 检测类型是否重复
             messagebox.showwarning('错误', '该类型已存在！')
         else:
             if messagebox.askyesno('确认', '确认要添加' + new_typename + '吗？'):
                 self.type_dict[new_typename] = []
-        self.save_type()
+        self.save_type() # 保存类型字典
         self.load_type() # 重新加载类型
 
     # 新建属性
     def create_attribution(self):
-        new_attribution = self.entry_attribution.get()
-        if new_attribution in self.type_dict[self.selected_type]:
+        new_attribution = self.entry_attribution.get() # 获取输入的新属性
+        if new_attribution in self.type_dict[self.selected_type]: # 检测属性是否重复
             messagebox.showwarning('错误', '该属性已存在！')
         else:
             if messagebox.askyesno('确认', '确认要添加' + new_attribution + '吗？'):
                 self.type_dict[self.selected_type].append(new_attribution)
                 self.changed_type = self.selected_type
-        self.save_type()
+        self.save_type() # 保存类型字典
         self.load_attribution() # 重新加载属性
 
     # 保存类型数据
