@@ -122,8 +122,10 @@ class Search:
     def show_detail(self):
         text = ''
         item_result = self.list_result.get(self.list_result.curselection()) # 获得当前选中的记录
-        index = item_result.split(':')[0]
+        index = item_result.split(':')[0] # 冒号前为物品的索引值
         # 显示物品简介
+            # 冒号之后为物品名称
+            # 物品信息显示格式以此为物品名称、物品类型、物品简介、物品属性
         text = item_result.split(':')[1] + '\n' +\
             '类型：' + self.item_dict[index]['type'] + '\n' +\
             '简介：' + self.item_dict[index]['intro'] + '\n'
@@ -131,6 +133,7 @@ class Search:
         
         attribution_dict = self.item_dict[index]['attributions'] # 不同种类物品特有属性
         # 显示物品特有属性
+            # 遍历对应物品的属性字典显示物品的各种属性
         for attribution in self.type_dict[self.item_dict[index]['type']]:
             text = text + attribution + "：" 
             try:

@@ -15,11 +15,11 @@ class Change:
         self.new_type = StringVar() # 存储新的类型名称
         self.new_attribution = StringVar() # 存储新的属性名称
         # 控件
-            # 显示物品类型名
+        # 显示物品类型名
         self.scroll_typename = Scrollbar(self.master)
         self.list_typename = Listbox(self.master, width=20, height=6, yscrollcommand=self.scroll_typename.set)
         self.scroll_typename.config(command=self.list_typename.yview)
-            # 显示物品类型属性
+        # 显示物品类型属性
         self.scroll_attribution = Scrollbar(self.master)
         self.list_attribution = Listbox(self.master, width=20, height=6, yscrollcommand=self.scroll_attribution.set)
         self.scroll_attribution.config(command=self.list_attribution.yview)
@@ -59,10 +59,12 @@ class Change:
     def load_attribution(self):
         self.list_attribution.delete(0, END)
         try:
+            # 获取选中物品类型对应的属性
             self.selected_type = self.list_typename.get(self.list_typename.curselection())
             for attribution in self.type_dict[self.selected_type]:
                 self.list_attribution.insert(END, attribution)
-        except:
+        except: 
+            # 如果刚修改完属性信息，此时类型没有被选中，则加载上一次选中的类型的属性
             for attribution in self.type_dict[self.changed_type]:
                 self.list_attribution.insert(END, attribution)
 

@@ -69,8 +69,9 @@ class Add:
     def begin_adding(self):
         self.selected_type = self.combo_type.get()
         try:
+            # 将选中的物品类型对应的属性放入待输入列表中
             self.remain_to_input = self.type_dict[self.selected_type]
-        except:
+        except: # 如果没有选中物品类型则报错
             messagebox.showwarning('错误', '请选择物品类型！')
             return
         # 变更按钮和输入框状态
@@ -109,25 +110,30 @@ class Add:
     def confirm(self):
         info = self.input_value.get()
         self.input_value.set('')  # 清空输入方便下一次输入
+        # 名称和简介的处理单独处理
         if self.new_attr_info == '名称':
             self.add_item_info['name'] = info
         elif self.new_attr_info == '简介':
             self.add_item_info['intro'] = info
         else:
+            # 处理新物品属性的输入
             self.add_item_attribution[self.new_attr_info] = info
+        # 将新物品的属性字典加入新物品字典的'attributions'中
         self.add_item_info['attributions'] = self.add_item_attribution
         try:
+            # 弹出需要输入的属性值供下一次输入
             self.new_attr_info = self.remain_to_input.pop()
             self.label_tip['text'] = '请输入' + self.new_attr_info + '信息'
         except:
             # 不能pop说明信息已经完全可以完成添加
+            # 以时间作为物品的索引值，防止出现索引值冲突的现象
             index = time.strftime("%Y%m%d%H%M%S", time.localtime())
             self.add_item_info['owner'] = self.user_name
             self.add_item_info['type'] = self.selected_type
             self.item_dict[index] = self.add_item_info
-            self.save_item()
+            self.save_item() # 将更新的物品字典保存
             messagebox.showinfo('添加物品成功', '物品' + self.add_item_info['name'] + '添加成功！')
-            self.reset()
+            self.reset() # 完成添加物品将界面重置以添加下一个物品
 
 
     # 返回用户界面
